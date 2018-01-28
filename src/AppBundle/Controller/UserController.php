@@ -78,7 +78,7 @@ class UserController extends FOSRestController
         elseif(empty($name) && !empty($role)){
             $user->setRole($role);
             $sn->flush();
-            return new View("role Updated Successfully", Response::HTTP_OK);
+            return new View("Role Updated Successfully", Response::HTTP_OK);
         }
         elseif(!empty($name) && empty($role)){
             $user->setName($name);
