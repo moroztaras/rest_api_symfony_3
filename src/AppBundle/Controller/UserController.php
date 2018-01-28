@@ -12,5 +12,15 @@ use AppBundle\Entity\User;
 
 class UserController extends FOSRestController
 {
-
+    /*
+     * @Rest\Get("/user")
+     */
+    public function getAction()
+    {
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
+        if ($restresult === null) {
+            return new View("There are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
 }
