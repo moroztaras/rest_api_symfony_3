@@ -87,4 +87,22 @@ class UserController extends FOSRestController
         }
         else return new View("User name or role cannot be empty", Response::HTTP_NOT_ACCEPTABLE);
     }
+
+    /**
+     * @Rest\Delete("/user/{id}")
+     */
+    public function deleteAction($id)
+    {
+        $data = new User;
+        $sn = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        if (empty($user)) {
+            return new View("User not found", Response::HTTP_NOT_FOUND);
+        }
+        else {
+            $sn->remove($user);
+            $sn->flush();
+        }
+        return new View("Deleted successfully", Response::HTTP_OK);
+    }
 }
