@@ -26,7 +26,7 @@ class User
      *
      * @ORM\Column(name="nane", type="string", length=255)
      */
-    private $nane;
+    private $name;
 
     /**
      * @var string
@@ -47,27 +47,27 @@ class User
     }
 
     /**
-     * Set nane
+     * Set name
      *
-     * @param string $nane
+     * @param string $name
      *
      * @return User
      */
-    public function setNane($nane)
+    public function setName($name)
     {
-        $this->nane = $nane;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get nane
+     * Get name
      *
      * @return string
      */
-    public function getNane()
+    public function getName()
     {
-        return $this->nane;
+        return $this->name;
     }
 
     /**

@@ -59,7 +59,7 @@ class UserController extends FOSRestController
     /**
      * @Rest\Put("/user/{id}")
      */
-    public function updateAction($id,Request $request)
+    public function updateAction($id, Request $request)
     {
         $data = new User;
         $name = $request->get('name');
