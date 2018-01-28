@@ -12,7 +12,7 @@ use AppBundle\Entity\User;
 
 class UserController extends FOSRestController
 {
-    /*
+    /**
      * @Rest\Get("/user")
      */
     public function getAction()
