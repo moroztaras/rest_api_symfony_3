@@ -23,4 +23,16 @@ class UserController extends FOSRestController
         }
         return $restresult;
     }
+
+    /**
+     * @Rest\Get("/user/{id}")
+     */
+    public function idAction($id)
+    {
+        $singleresult = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        if ($singleresult === null) {
+            return new View("User not found", Response::HTTP_NOT_FOUND);
+        }
+        return $singleresult;
+    }
 }
