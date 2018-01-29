@@ -19,7 +19,7 @@ class UserController extends FOSRestController
     {
         $restresult = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
         if ($restresult === null) {
-            return new View("There are no users exist", Response::HTTP_NOT_FOUND);
+            return new View("Користувач не знайдений", Response::HTTP_NOT_FOUND);
         }
         return $restresult;
     }
@@ -72,20 +72,23 @@ class UserController extends FOSRestController
         elseif(!empty($name) && !empty($role)){
             $user->setName($name);
             $user->setRole($role);
+            $sn->persist($user);
             $sn->flush();
             return new View("Користувач оновлено успішно", Response::HTTP_OK);
         }
         elseif(empty($name) && !empty($role)){
             $user->setRole($role);
+            $sn->persist($user);
             $sn->flush();
             return new View("Роль оновлено успішно", Response::HTTP_OK);
         }
         elseif(!empty($name) && empty($role)){
             $user->setName($name);
+            $sn->persist($user);
             $sn->flush();
             return new View("Ім'я користувача оновлено успішно", Response::HTTP_OK);
         }
-        else return new View("Ім'я користувача чи роль не може бути пустим", Response::HTTP_NOT_ACCEPTABLE);
+        else return new View("Ім'я користувача чи роль не можуть бути пустими", Response::HTTP_NOT_ACCEPTABLE);
     }
 
     /**
