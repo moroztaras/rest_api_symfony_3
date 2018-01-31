@@ -34,4 +34,31 @@ class PostController extends FOSRestController
 
         return FOSView::create(array('errors' => $form->getErrors()), Codes::HTTP_INTERNAL_SERVER_ERROR);
     }
+
+    /**
+     * Update a Post entity.
+     * @View(serializerEnableMaxDepthChecks=true)
+     * @param Request $request
+     * @param $entity
+     * @return Response
+     */
+    public function putAction(Request $request, Post $entity)
+    {
+        try {
+            $em = $this->getDoctrine()->getManager();
+            $request->setMethod('PATCH'); //Treat all PUTs as PATCH
+            $form = $this->createForm(new PostType(), $entity, array("method" => $request->getMethod()));
+            $this->removeExtraFields($request, $form);
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em->flush();
+
+                return $entity;
+            }
+
+            return FOSView::create(array('errors' => $form->getErrors()), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Exception $e) {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
