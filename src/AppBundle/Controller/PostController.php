@@ -73,4 +73,25 @@ class PostController extends FOSRestController
     {
         return $this->putAction($request, $entity);
     }
+
+    /**
+     * Delete a Post entity.
+     * @View(statusCode=204)
+     * @param Request $request
+     * @param $entity
+     * @internal param $id
+     * @return Response
+     */
+    public function deleteAction(Request $request, Post $entity)
+    {
+        try {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($entity);
+            $em->flush();
+
+            return null;
+        } catch (\Exception $e) {
+            return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
