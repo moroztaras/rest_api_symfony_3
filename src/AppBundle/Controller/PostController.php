@@ -61,4 +61,16 @@ class PostController extends FOSRestController
             return FOSView::create($e->getMessage(), Codes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Partial Update to a Post entity.
+     * @View(serializerEnableMaxDepthChecks=true)
+     * @param Request $request
+     * @param $entity
+     * @return Response
+     */
+    public function patchAction(Request $request, Post $entity)
+    {
+        return $this->putAction($request, $entity);
+    }
 }
