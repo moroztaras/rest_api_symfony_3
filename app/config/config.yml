@@ -90,20 +90,16 @@ nelmio_cors:
 #        formats:
 #            json: true
 
-sensio_framework_extra:
-    request: { converters: true }
-    view:    { annotations: false }
-    router:  { annotations: true }
-
 fos_rest:
     routing_loader:
         default_format: json
     param_fetcher_listener: true
     body_listener: true
-    body_converter:
-        enabled: true
-    view:
-        view_response_listener: force
+    #disable_csrf_role: ROLE_USER
+#   body_converter:
+#        enabled: true
+#    view:
+#        view_response_listener: force
 
 nelmio_cors:
     defaults:
@@ -119,3 +115,8 @@ nelmio_cors:
             allow_headers: ['*']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
+
+sensio_framework_extra:
+    request: { converters: true }
+    view:    { annotations: false }
+    router:  { annotations: true }
